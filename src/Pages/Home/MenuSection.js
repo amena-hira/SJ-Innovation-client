@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import MenuItem from '../../Component/MenuItem';
+import { Link } from 'react-router-dom';
 
 const MenuSection = () => {
     const [coffees, setCoffees] = useState();
@@ -23,7 +24,7 @@ const MenuSection = () => {
                 }
             </div>
             <div className='text-center py-7'>
-                <button className='btn'>View All</button>
+                <Link className='btn' to='/menu'>View All</Link>
             </div>
         </div>
     );

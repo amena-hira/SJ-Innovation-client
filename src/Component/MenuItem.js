@@ -1,7 +1,9 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 
-const MenuItem = ({item}) => {
-    const {image, name, price, description} = item;
+const MenuItem = ({ item }) => {
+    const location = useLocation();
+    const { image, name, price, description } = item;
     return (
         <div>
             <div className="card bg-base-100 shadow-xl">
@@ -11,7 +13,14 @@ const MenuItem = ({item}) => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name}</h2>
                     <h4>${price}</h4>
-                    <p>{description.slice(0,54)}....</p>
+                    <p>
+                        {
+                            location.pathname === '/' ?
+                            <>${description.slice(0,54)}.....</>
+                            :
+                            description
+                        }
+                    </p>
                     <div className="card-actions">
                         <button className="btn btn-warning">Order Now</button>
                     </div>
