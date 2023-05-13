@@ -1,9 +1,28 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import background from '../../images/background.jpg';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Signup = () => {
-    const location = useLocation();
+    const { createUser } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleSignUp  = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email,password);
+        createUser(email,password)
+            .then(result => {
+                console.log(result);
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${background})` }}>
             <div className="hero-overlay bg-opacity-60"></div>
@@ -11,7 +30,7 @@ const Signup = () => {
                 <div className="max-w-xl">
                     <h1 className="mb-5 text-5xl font-semibold">Sign Up
                     </h1>
-                    <form>
+                    <form onSubmit={handleSignUp}>
                         <div className="form-control md:w-96">
                             <label className="label">
                                 <span className="label-text text-white">Email</span>

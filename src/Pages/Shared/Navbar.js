@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import profile from '../../images/profile-avatar.jpg';
+import { AuthContext } from '../../context/AuthProvider';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogOut = () =>{
+        logout()
+        .then(result => console.log(result))
+        .catch(error => console.log(error))
+    }
+
     const menu = <li><Link>Menu</Link></li>;
     return (
         <div className='max-w-7xl mx-auto'>
@@ -22,19 +31,25 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1 hidden md:flex">
                         {menu}
                     </ul>
-                    <ul className="menu menu-horizontal px-1 hidden md:flex">
-                        <li><Link to='/login'>Login</Link></li>
-                    </ul>
-                    <div className="dropdown dropdown-end">
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img src={profile} alt='Profile' />
+                    {
+                        user?.email ?
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img src={profile} alt='Profile' />
+                                    </div>
+                                </label>
+                                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li onClick={handleLogOut}><Link>Logout</Link></li>
+                                </ul>
                             </div>
-                        </label>
-                        <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><Link>Logout</Link></li>
-                        </ul>
-                    </div>
+                            :
+                            <ul className="menu menu-horizontal px-1 hidden md:flex">
+                                <li><Link to='/login'>Login</Link></li>
+                            </ul>
+                    }
+
+
                 </div>
             </div>
         </div>

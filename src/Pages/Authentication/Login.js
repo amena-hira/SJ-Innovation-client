@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import background from '../../images/background.jpg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
+import { AuthContext } from '../../context/AuthProvider';
 
 const Login = () => {
+    const { login, googleLogin } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                console.log(result);
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+    const handleLogin = (event) => {
+        event.preventDefault()
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        console.log(email,password);
+        login(email,password)
+            .then(result => {
+                console.log(result);
+                navigate('/');
+            })
+            .catch(error => {
+                console.log(error);
+            })
+
+    }
     return (
         <div className="hero min-h-screen" style={{ backgroundImage: `url(${background})` }}>
             <div className="hero-overlay bg-opacity-60"></div>
@@ -13,15 +42,12 @@ const Login = () => {
                         Login
                     </h1>
                     <div className="divider">OR</div>
-                    <div className="avatar placeholder">
+                    <div className="avatar placeholder" onClick={handleGoogleLogin}>
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
                             <span className="text-4xl"><FcGoogle></FcGoogle></span>
                         </div>
                     </div>
-                    {/* <div className='flex justify-center pt-4 text-4xl'>
-                        <FcGoogle></FcGoogle>
-                    </div> */}
-                    <form>
+                    <form onSubmit={handleLogin}>
                         <div className="form-control md:w-96">
                             <label className="label">
                                 <span className="label-text text-white">Email</span>
