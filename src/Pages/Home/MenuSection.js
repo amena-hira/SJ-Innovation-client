@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const MenuSection = () => {
     const [coffees, setCoffees] = useState();
     useEffect(()=>{
-        fetch('http://localhost:5000/coffees')
+        fetch('https://sj-innovation-server.vercel.app/coffees')
         .then(res=>res.json())
         .then(data=>{
             console.log(data);

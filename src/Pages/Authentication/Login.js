@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import background from '../../images/background.jpg';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle, FcHome } from "react-icons/fc";
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
 
@@ -10,7 +10,7 @@ const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-    console.log("login from:",from);
+    console.log("login from:", from);
 
     const handleGoogleLogin = () => {
         googleLogin()
@@ -40,7 +40,7 @@ const Login = () => {
                 toast('Please first create an account to see the full menu!! Thank you.', {
                     icon: '👏',
                 });
-                event.preventDefault(); 
+                event.preventDefault();
             })
 
     }
@@ -49,6 +49,11 @@ const Login = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-xl">
+                    <div className='flex justify-end'>
+                        <Link to='/' className="text-5xl font-semibold tooltip" data-tip="Home">
+                            <FcHome></FcHome>
+                        </Link>
+                    </div>
                     <h1 className="text-5xl font-semibold">
                         Login
                     </h1>
@@ -81,7 +86,7 @@ const Login = () => {
                         </div>
                     </form>
 
-                    <p className='pt-5'>Don't have an account? <Link to='/signup' state={{from:{pathname: from}}} className='btn-link text-warning hover:text-slate-900'>Signup</Link></p>
+                    <p className='pt-5'>Don't have an account? <Link to='/signup' state={{ from: { pathname: from } }} className='btn-link text-warning hover:text-slate-900'>Signup</Link></p>
                 </div>
             </div>
         </div>

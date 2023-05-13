@@ -3,21 +3,22 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import background from '../../images/background.jpg';
 import { AuthContext } from '../../context/AuthProvider';
 import { toast } from 'react-hot-toast';
+import { FcHome } from "react-icons/fc";
 
 const Signup = () => {
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
-    console.log("sign up: ",from);
+    console.log("sign up: ", from);
 
-    const handleSignUp  = (event) => {
+    const handleSignUp = (event) => {
         event.preventDefault();
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email,password);
-        createUser(email,password)
+        console.log(email, password);
+        createUser(email, password)
             .then(result => {
                 console.log(result);
                 navigate(from, { replace: true });
@@ -33,6 +34,11 @@ const Signup = () => {
             <div className="hero-overlay bg-opacity-60"></div>
             <div className="hero-content text-center text-neutral-content">
                 <div className="max-w-xl">
+                    <div className='flex justify-end'>
+                        <Link to='/' className="text-5xl font-semibold tooltip" data-tip="Home">
+                            <FcHome></FcHome>
+                        </Link>
+                    </div>
                     <h1 className="mb-5 text-5xl font-semibold">Sign Up
                     </h1>
                     <form onSubmit={handleSignUp}>
@@ -53,7 +59,7 @@ const Signup = () => {
                         </div>
                     </form>
 
-                    <p className='pt-5'>Have an account? <Link to='/login' state={{from:{pathname: from}}} className='btn-link text-warning hover:text-slate-900'>Login</Link></p>
+                    <p className='pt-5'>Have an account? <Link to='/login' state={{ from: { pathname: from } }} className='btn-link text-warning hover:text-slate-900'>Login</Link></p>
                 </div>
             </div>
         </div>

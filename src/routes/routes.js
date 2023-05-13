@@ -19,7 +19,7 @@ const routes = createBrowserRouter([
             {
                 path: '/menu',
                 element: <PrivateRoute><Menu></Menu></PrivateRoute>,
-                loader: ()=> fetch('http://localhost:5000/coffees')
+                loader: ()=> fetch('https://sj-innovation-server.vercel.app/coffees')
             }
         ]
     },
