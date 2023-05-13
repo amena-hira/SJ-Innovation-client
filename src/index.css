@@ -12,3 +12,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+/* custom css */
+.divider::before,.divider::after{
+  background-color: white;
+}
+.min-height{
+  min-height: 90vh;
+}

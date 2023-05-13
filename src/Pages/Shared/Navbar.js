@@ -22,6 +22,9 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1 hidden md:flex">
                         {menu}
                     </ul>
+                    <ul className="menu menu-horizontal px-1 hidden md:flex">
+                        <li><Link to='/login'>Login</Link></li>
+                    </ul>
                     <div className="dropdown dropdown-end">
                         <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
