@@ -11,7 +11,7 @@ const MenuItem = ({item}) => {
                 <div className="card-body items-center text-center">
                     <h2 className="card-title">{name}</h2>
                     <h4>${price}</h4>
-                    <p>{description}</p>
+                    <p>{description.slice(0,54)}....</p>
                     <div className="card-actions">
                         <button className="btn btn-warning">Order Now</button>
                     </div>
