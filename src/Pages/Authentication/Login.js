@@ -1,17 +1,23 @@
 import React, { useContext } from 'react';
 import background from '../../images/background.jpg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const { login, googleLogin } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    console.log("login from:",from);
+
     const handleGoogleLogin = () => {
         googleLogin()
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate(from, { replace: true });
+                toast.success('Logged in successfully!!!')
             })
             .catch(error => {
                 console.log(error);
@@ -22,14 +28,19 @@ const Login = () => {
         const form = event.target;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(email,password);
-        login(email,password)
+        console.log(email, password);
+        login(email, password)
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate(from, { replace: true });
+                toast.success('Logged in successfully!!!')
             })
             .catch(error => {
                 console.log(error);
+                toast('Please first create an account to see the full menu!! Thank you.', {
+                    icon: '👏',
+                });
+                event.preventDefault(); 
             })
 
     }
@@ -70,7 +81,7 @@ const Login = () => {
                         </div>
                     </form>
 
-                    <p className='pt-5'>Don't have an account? <Link to='/signup' className='btn-link text-warning hover:text-black'>Signup</Link></p>
+                    <p className='pt-5'>Don't have an account? <Link to='/signup' state={{from:{pathname: from}}} className='btn-link text-warning hover:text-slate-900'>Signup</Link></p>
                 </div>
             </div>
         </div>

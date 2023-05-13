@@ -1,11 +1,15 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import background from '../../images/background.jpg';
 import { AuthContext } from '../../context/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Signup = () => {
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+    console.log("sign up: ",from);
 
     const handleSignUp  = (event) => {
         event.preventDefault();
@@ -16,7 +20,8 @@ const Signup = () => {
         createUser(email,password)
             .then(result => {
                 console.log(result);
-                navigate('/');
+                navigate(from, { replace: true });
+                toast.success('Sign up successfully!!!')
             })
             .catch(error => {
                 console.log(error);
@@ -48,7 +53,7 @@ const Signup = () => {
                         </div>
                     </form>
 
-                    <p className='pt-5'>Have an account? <Link to='/login' className='btn-link text-warning hover:text-black'>Login</Link></p>
+                    <p className='pt-5'>Have an account? <Link to='/login' state={{from:{pathname: from}}} className='btn-link text-warning hover:text-slate-900'>Login</Link></p>
                 </div>
             </div>
         </div>

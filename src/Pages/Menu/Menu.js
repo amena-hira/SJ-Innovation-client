@@ -1,7 +1,6 @@
 import React from 'react';
 import { useLoaderData } from 'react-router-dom';
 import MenuItem from '../../Component/MenuItem';
-import Footer from '../Home/Footer';
 
 const Menu = () => {
     const coffees = useLoaderData();
@@ -14,7 +13,7 @@ const Menu = () => {
                     }
                 </div>
             </div>
-            <Footer></Footer>
+
         </>
     );
 };

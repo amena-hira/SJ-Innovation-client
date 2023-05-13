@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Footer = () => {
     return (
         <div>
-            <footer className="footer footer-center p-10 text-base-content rounded" style={{background: '#F6F5F1'}}>
+            <footer className="footer footer-center p-10 text-base-content rounded" style={{ background: '#F6F5F1' }}>
                 <div className="grid grid-flow-col gap-4">
                     <Link to='/home' className="link link-hover">Home</Link>
                     <Link to='/menu' className="link link-hover">Menu</Link>

@@ -24,7 +24,7 @@ const MenuSection = () => {
                 }
             </div>
             <div className='text-center py-7'>
-                <Link className='btn' to='/menu'>View All</Link>
+                <Link className='btn' to='/menu'>See More</Link>
             </div>
         </div>
     );
